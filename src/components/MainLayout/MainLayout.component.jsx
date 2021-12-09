@@ -1,9 +1,11 @@
 import { Layout, Menu } from 'antd';
-import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
+import {HomeOutlined,BarcodeOutlined, UserOutlined,SettingOutlined } from '@ant-design/icons';
 import "./MainLayout.styles.css";
+import { Link } from 'react-router-dom';
 const { Header, Content, Footer, Sider } = Layout;
 
-const MainLayout= () => {
+
+const MainLayout= ({children , menuKey}) => {
 
     return(
         <Layout style={{minHeight : "100vh"}}>
@@ -18,18 +20,22 @@ const MainLayout= () => {
       }}
     >
       <div className="logo" />
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-        <Menu.Item key="1" icon={<UserOutlined />}>
-          nav 1
+      <Menu theme="dark" mode="inline" defaultSelectedKeys={[menuKey]}>
+        <Menu.Item key="1" icon={<HomeOutlined/>}>
+          <Link to = "/">
+            Venta
+          </Link>
         </Menu.Item>
-        <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-          nav 2
+        <Menu.Item key="2" icon={<UserOutlined />}>
+          <Link to = "/client">
+            Cliente
+          </Link>
         </Menu.Item>
-        <Menu.Item key="3" icon={<UploadOutlined />}>
-          nav 3
+        <Menu.Item key="3" icon={<BarcodeOutlined />}>
+          Inventario
         </Menu.Item>
-        <Menu.Item key="4" icon={<UserOutlined />}>
-          nav 4
+        <Menu.Item key="4" icon={<SettingOutlined />}>
+          Ajustes
         </Menu.Item>
       </Menu>
     </Sider>
@@ -37,10 +43,10 @@ const MainLayout= () => {
       <Header className="site-layout-sub-header-background" style={{ padding: 0 }} />
       <Content style={{ margin: '24px 16px 0' }}>
         <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-          content
+          {children}
         </div>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+      <Footer style={{ textAlign: 'center' }}>BD Team ©2021 </Footer>
     </Layout>
   </Layout>
     )
