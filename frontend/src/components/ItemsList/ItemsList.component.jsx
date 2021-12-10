@@ -49,7 +49,7 @@ const addElement = () =>{
   alert("Hello")
 }
 
-const ItemsList = () =>{
+const ItemsList = ({setAddedItems}) =>{
     return(
         <List
             grid={{

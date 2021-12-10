@@ -1,10 +1,31 @@
 import React from 'react';
+import axios from 'axios';
 import MainLayout from '../../components/MainLayout/MainLayout.component';
-import { Form, Input, Button, Checkbox,Typography, Space } from 'antd';
+import { Form, Input, Button,Typography, Space } from 'antd';
 const {Title , Text} = Typography
 
 
 const Client = () =>{
+
+    const submitRegister = (values) => {
+        
+        console.log(values);
+        var url = "/api/client"
+        var data = {};
+        axios.post(url , data)
+        .then(respnse =>{
+            // setSaleItems(respnse.data);
+        })
+        .catch(error =>{
+            console.error(error);
+        })
+        .finally(() =>{
+            
+        })
+    };
+    
+
+
     return(
         <MainLayout menuKey = "2">
             <Title level ={2}>Cliente</Title>
@@ -14,6 +35,7 @@ const Client = () =>{
             <Space align = "end">
             <Form
                 name="basic"
+                onFinish ={submitRegister}
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
                 initialValues={{ remember: true }}
