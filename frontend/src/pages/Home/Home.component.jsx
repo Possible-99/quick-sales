@@ -21,10 +21,10 @@ const Home = () =>{
     useEffect(() => {
         var url = "/api/items"
         axios.get(url)
-        .then(respnse =>{
-            // setSaleItems(respnse.data);
-            console.log(respnse);
-            console.log("hello");
+        .then(response =>{
+            setSaleItems(response.data);
+            console.log(response.data);
+            // console.log("hello");
         })
         .catch(error =>{
             console.error(error);
@@ -53,7 +53,9 @@ const Home = () =>{
         <MainLayout menuKey = "1">
             <Space direction = "vertical" >
             <Title level ={2} >Favoritos</Title>
-            <ItemsList saleItems = {saleItems} setAddedItems = {setAddedItems}/>
+            {
+                saleItems != null ? <ItemsList saleItems = {saleItems} setAddedItems = {setAddedItems}/> : <></> 
+            }
             <Search placeholder="12929192" allowClear onSearch={onSearch} style={{ width: 200 , float :"right" }} />
             <Title level ={2} >Venta actual</Title>
             <SalesList/>

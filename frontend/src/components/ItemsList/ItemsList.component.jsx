@@ -49,7 +49,7 @@ const addElement = () =>{
   alert("Hello")
 }
 
-const ItemsList = ({setAddedItems}) =>{
+const ItemsList = ({setAddedItems, saleItems}) =>{
     return(
         <List
             grid={{
@@ -61,14 +61,13 @@ const ItemsList = ({setAddedItems}) =>{
             xl: 6,
             xxl: 3,
             }}
-            dataSource={data}
+            dataSource={saleItems}
             renderItem={item => (
             <List.Item style = {{color :"white"}}>
                 <Card  bordered = {true} style ={{backgroundColor :"#374785", color: "white" , textAlign : "center"}} hoverable = {true} onClick ={addElement}>
-                    <Title level = {2} style={{color:"white"}} >Durex</Title>
-                    <Text strong ={true} style = {{color : "white" , fontSize : "18px"}} >$200</Text>
+                    <Title level = {2} style={{color:"white"}} >{item.descripcion}</Title>
+                    <Text strong ={true} style = {{color : "white" , fontSize : "18px"}} >${item.precio_venta}</Text>
                 </Card>
-               
             </List.Item>
             )}
         />
