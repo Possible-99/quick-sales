@@ -22,21 +22,21 @@ const data = [
     },
   ];
 
-const SalesList = () =>{
+const SalesList = ({addedItems}) =>{
 
     return(
         <List
         itemLayout="horizontal"
-        dataSource={data}
+        dataSource={addedItems}
         style ={{padding:"1rem"}}
         renderItem={item => (
         <List.Item>
-            <InputNumber min={1} max={10} defaultValue={3} onChange={onChange} bordered ={false}/>
+            <InputNumber min={1} max={10} value={ item.cantidad}  onChange={onChange} bordered ={false}/>
             <List.Item.Meta
-            title={<Text style ={{fontSize:"18px"}}>{item.title}</Text>}
+            title={<Text style ={{fontSize:"18px"}}>{item.descripcion}</Text>}
             
             />
-            <Text strong ={true}>$200</Text>
+            <Text strong ={true}>${item.precio_venta}</Text>
         </List.Item>
         )}
         />

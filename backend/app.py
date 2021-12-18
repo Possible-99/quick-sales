@@ -1,6 +1,6 @@
 from flask import Flask, request , jsonify
 from flask_sqlalchemy import SQLAlchemy 
-from sqlalchemy import BigInteger, exc, Date 
+from sqlalchemy import BigInteger, exc, Date, Numeric, Text
 from datetime import datetime
 import json
 
@@ -31,8 +31,7 @@ db = SQLAlchemy(app)
 ############### Models
 
 class Cliente(db.Model):
-    id_cliente = db.Column(db.Integer, primary_key=True)
-    rfc = db.Column(db.String(13), nullable=False, unique =True )
+    rfc = db.Column(db.String(13), primary_key=True)
     nombre = db.Column(db.String(40), nullable=False)
     ap_paterno= db.Column(db.String(40), nullable=False)
     ap_materno= db.Column(db.String(40), nullable=True)
@@ -83,6 +82,44 @@ class Articulo(db.Model):
         self.id_proveedor= id_proveedor 
         self.precio_venta = precio_venta
 
+############ Venta 
+
+class Venta(db.Model):
+    fecha_venta= db.Column(Date, nullable=False)
+    monto_total= db.Column(Numeric, nullable=False);
+    rfc = db.Column(db.String(13), primary_key=True)
+    def __init__(self , fecha_venta , monto_total , rfc):
+        fecha_venta = fecha_venta
+        monto_total = monto_total
+        rfc = rfc
+
+############### participa
+
+# class Participa(db.Model):
+#     id_articulo = db.Column(BigInteger, nullable=False)
+#     num_venta = db.Column(Text , nullable = False)
+#     cantidad_articulo = db.Column(BigInteger , nullable = False)
+#     precio_tot_dart = db.Column(Numeric , nullable = False)
+
+#     def __init__(self , id_articulo, num_venta, cantidad_articulo, precio_tot_dart):
+#         id_articulo = id_articulo
+#         num_venta = num_venta
+#         cantidad_articulo = cantidad_articulo
+#         precio_tot_dart  = precio_tot_dart
+
+
+
+#################
+
+
+
+
+
+
+
+
+
+########### Participa
 
 
 
@@ -97,6 +134,17 @@ class Articulo(db.Model):
 # newArticulo = Articulo("212927", "Impresion Color", "Pape", 2 , 2, 2,datetime.today().strftime('%Y-%m-%d'), 1 , 1 , 4);
 # db.session.add(newArticulo)
 # db.session.commit()
+
+
+
+######Venta
+
+# newSale = Venta(datetime.today().strftime('%Y-%m-%d') , "222" , "fyzf223123")
+# db.session.add(newSale)
+
+# for article in articles:
+#     newItemSale = Participa(article["id_articulo"] , article["num_venta"] , article["cantidad_articulo"] , articnewItemSale = Participa(article["id_articulo"] , article["num_venta"] , article["precio_tot_dart"])
+#     db.session.add(newItemSale)
 
 ######## Routes
 
@@ -120,7 +168,16 @@ def items():
 @app.route('/api/checkout', methods=['POST'])
 def checkout():
     if request.method == 'POST':
-        print("here in checkout!!")
+        data = request.json
+        print(data)
+        # # Object attibutes , venta , rfc , monto_total;
+        # newSale = Venta(datetime.today().strftime('%Y-%m-%d') , data["monto_total"] , data["rfc"])
+        # db.session.add(newSale)
+        # articles = data["articles"]
+        # ## Array 
+        # for article in articles:
+        #     newItemSale = Participa(article["id_articulo"] , article["num_venta"] , article["cantidad_articulo"] , articnewItemSale = Participa(article["id_articulo"] , article["num_venta"] , article["precio_tot_dart"])
+        #     db.session.add(newItemSale)
         return {"message": "hello"}
 
 @app.route('/api/client', methods=['POST'])
